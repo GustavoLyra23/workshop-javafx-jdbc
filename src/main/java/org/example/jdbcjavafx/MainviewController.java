@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import services.DepartmentService;
 import util.Alerts;
 
 import java.io.IOException;
@@ -35,8 +36,29 @@ public class MainviewController implements Initializable {
 
     @FXML
     public void onMenuItemDepartmentAction(ActionEvent event) {
-        loadView("departmentlist.fxml");
+        loadView2("departmentlist.fxml");
 
+    }
+
+    private void loadView2(String absoluteName) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(absoluteName));
+            VBox vbox = fxmlLoader.load();
+            Scene mainScene = HelloApplication.getMainScene();
+            VBox mainVbox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+            Node mainMenu = mainVbox.getChildren().get(0);
+            mainVbox.getChildren().clear();
+            mainVbox.getChildren().add(mainMenu);
+            mainVbox.getChildren().addAll(vbox.getChildren());
+
+            DepartmentListController departmentListController = fxmlLoader.getController();
+            departmentListController.setService(new DepartmentService());
+            departmentListController.updateTableView();
+
+
+        } catch (IOException e) {
+            Alerts.showAlert("IOException", "Error Loading view", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML

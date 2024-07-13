@@ -1,6 +1,8 @@
 package org.example.jdbcjavafx;
 
 import entities.Department;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,11 +11,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import services.DepartmentService;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DepartmentListController implements Initializable {
+
+
+    private DepartmentService service;
+
 
     @FXML
     private TableView<Department> tableViewDepartment;
@@ -27,11 +35,19 @@ public class DepartmentListController implements Initializable {
     @FXML
     private Button btNew;
 
+
+    private ObservableList<Department> obsList;
+
+
     @FXML
     public void onBtNewAction(ActionEvent event) {
         System.out.println("onBtNewAction");
     }
 
+
+    public void setService(DepartmentService service) {
+        this.service = service;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,5 +59,15 @@ public class DepartmentListController implements Initializable {
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         Stage stage = (Stage) HelloApplication.getMainScene().getWindow();
         tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
+    }
+
+    public void updateTableView() {
+        if (service == null) {
+            throw new IllegalStateException("Service not initialized");
+        }
+
+        List<Department> departmentList = service.getAllDepartments();
+        obsList = FXCollections.observableList(departmentList);
+        tableViewDepartment.setItems(obsList);
     }
 }
