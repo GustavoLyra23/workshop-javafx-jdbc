@@ -1,4 +1,44 @@
 package org.example.jdbcjavafx;
 
-public class MainviewController {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainviewController implements Initializable {
+
+    @FXML
+    private MenuItem menuItemSeller;
+
+    @FXML
+    private MenuItem menuItemDepartment;
+
+    @FXML
+    private MenuItem menuItemAbout;
+
+    @FXML
+    public void onMenuItemSellerAction(ActionEvent event) {
+        System.out.println("onMenuItemSellerAction");
+
+    }
+
+    @FXML
+    public void onMenuItemDepartmentAction(ActionEvent event) {
+        System.out.println("onMenuItemDepartmentAction");
+
+    }
+
+    @FXML
+    public void onMenuItemAboutAction(ActionEvent event) {
+        System.out.println("onMenuItemAboutAction");
+
+    }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 }
