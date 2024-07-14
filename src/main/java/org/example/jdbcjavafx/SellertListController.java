@@ -5,13 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.jdbcjavafx.db.DbIntegrityException;
 import org.example.jdbcjavafx.entities.Seller;
@@ -19,8 +15,8 @@ import org.example.jdbcjavafx.services.SellerService;
 import org.example.jdbcjavafx.util.Alerts;
 import org.example.jdbcjavafx.util.Utils;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -28,6 +24,15 @@ import java.util.ResourceBundle;
 public class SellertListController implements Initializable, DataChangeListener {
 
     private SellerService service;
+
+    @FXML
+    private TableColumn<Seller, String> tableColumnEmail;
+
+    @FXML
+    private TableColumn<Seller, Date> tableColumnBirthDate;
+
+    @FXML
+    private TableColumn<Seller, Double> tableColumnBaseSalary;
 
 
     @FXML
@@ -76,8 +81,14 @@ public class SellertListController implements Initializable, DataChangeListener 
     private void initializeNodes() {
         tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        Stage stage = (Stage) HelloApplication.getMainScene().getWindow();
+        tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tableColumnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("baseSalary"));
+        tableColumnBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+         Utils.formatTableColumnDate(tableColumnBirthDate, "dd/MM/yyyy");
+         Utils.formatTableColumnDouble(tableColumnBaseSalary, 2);
+         Stage stage = (Stage) HelloApplication.getMainScene().getWindow();
         tableViewSeller.prefHeightProperty().bind(stage.heightProperty());
+
     }
 
     public void updateTableView() {
