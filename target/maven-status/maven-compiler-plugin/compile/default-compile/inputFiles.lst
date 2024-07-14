@@ -2,6 +2,7 @@ C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\util\Utils.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\dao\impl\DepartmentDaoJDBC.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\db\DbException.java
+C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\exceptions\ValidationException.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\db\DB.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\MainviewController.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\dao\DaoFactory.java
@@ -11,6 +12,7 @@ C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\db\DbIntegrityException.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\dao\SellerDao.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\module-info.java
+C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\DataChangeListener.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\DepartmentFormController.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\DepartmentListController.java
 C:\Users\gusta\OneDrive\Área de Trabalho\jdbc-javafx\src\main\java\org\example\jdbcjavafx\entities\Department.java

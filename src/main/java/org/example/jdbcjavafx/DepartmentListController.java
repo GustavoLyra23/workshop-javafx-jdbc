@@ -1,5 +1,6 @@
 package org.example.jdbcjavafx;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -38,6 +36,10 @@ public class DepartmentListController implements Initializable, DataChangeListen
 
     @FXML
     private TableColumn<Department, String> tableColumnName;
+
+    @FXML
+    private TableColumn<Department, Department> tableColumnEdit;
+
 
     @FXML
     private Button btNew;
@@ -80,6 +82,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
         List<Department> departmentList = service.getAllDepartments();
         obsList = FXCollections.observableList(departmentList);
         tableViewDepartment.setItems(obsList);
+        initEditButtons();
     }
 
     private void createDialogForm(Department obj, String absoluteName, Stage parentStage) {
@@ -107,6 +110,28 @@ public class DepartmentListController implements Initializable, DataChangeListen
         }
     }
 
+
+    private void initEditButtons() {
+        tableColumnEdit.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        tableColumnEdit.setCellFactory(param -> new TableCell<Department, Department>() {
+            private final Button button = new Button("edit");
+
+            @Override
+            protected void updateItem(Department obj, boolean empty) {
+                super.updateItem(obj, empty);
+
+                if (obj == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(button);
+                button.setOnAction(
+                        event -> createDialogForm(
+                                obj, "departmentform.fxml", Utils.currentStage(event)));
+            }
+        });
+    }
 
     @Override
     public void onDataChanged() {
