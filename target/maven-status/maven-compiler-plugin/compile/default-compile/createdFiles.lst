@@ -10,6 +10,7 @@ org\example\jdbcjavafx\dao\SellerDao.class
 org\example\jdbcjavafx\db\DB.class
 module-info.class
 org\example\jdbcjavafx\dao\DepartmentDao.class
+org\example\jdbcjavafx\DepartmentListController$2.class
 org\example\jdbcjavafx\DataChangeListener.class
 org\example\jdbcjavafx\DepartmentListController.class
 org\example\jdbcjavafx\dao\DaoFactory.class
