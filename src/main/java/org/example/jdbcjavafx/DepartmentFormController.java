@@ -9,17 +9,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.example.jdbcjavafx.db.DbException;
 import org.example.jdbcjavafx.entities.Department;
+import org.example.jdbcjavafx.exceptions.ValidationException;
 import org.example.jdbcjavafx.services.DepartmentService;
 import org.example.jdbcjavafx.util.Alerts;
 import org.example.jdbcjavafx.util.Constraints;
 import org.example.jdbcjavafx.util.Utils;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class DepartmentFormController implements Initializable{
+public class DepartmentFormController implements Initializable {
 
 
     private DepartmentService departmentService;
@@ -64,6 +63,8 @@ public class DepartmentFormController implements Initializable{
             Utils.currentStage(event).close();
         } catch (DbException ex) {
             Alerts.showAlert("Error saving object", null, ex.getMessage(), Alert.AlertType.ERROR);
+        } catch (ValidationException ex) {
+            setErrorMessage(ex.getErrors());
         }
     }
 
@@ -74,8 +75,21 @@ public class DepartmentFormController implements Initializable{
 
     private Department getFormData() {
         Department department = new Department();
-        department.setName(txtName.getText());
+
+        ValidationException exception = new ValidationException("Validation error");
+
         department.setId(Utils.tryParseToInt(txtId.getText()));
+
+        if (txtName.getText() == null) {
+            exception.addError("name", "Field cant be empty");
+        }
+
+        if (!exception.getErrors().isEmpty()) {
+            throw exception;
+        }
+
+        department.setName(txtName.getText());
+
         return department;
     }
 
@@ -113,4 +127,12 @@ public class DepartmentFormController implements Initializable{
         txtId.setText(String.valueOf(department.getId()));
         txtName.setText(department.getName());
     }
+
+    private void setErrorMessage(Map<String, String> error) {
+        Set<String> keys = error.keySet();
+        if (keys.contains("name")) {
+            lblErroName.setText(error.get("name"));
+        }
+    }
+
 }
