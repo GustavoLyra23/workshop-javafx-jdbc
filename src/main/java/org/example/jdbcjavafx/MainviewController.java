@@ -16,6 +16,7 @@ import util.Alerts;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class MainviewController implements Initializable {
 
@@ -36,34 +37,18 @@ public class MainviewController implements Initializable {
 
     @FXML
     public void onMenuItemDepartmentAction(ActionEvent event) {
-        loadView2("departmentlist.fxml");
+        loadView("departmentlist.fxml", (DepartmentListController controller) -> {
+            controller.setService(new DepartmentService());
+            controller.updateTableView();
+        });
 
     }
 
-    private void loadView2(String absoluteName) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(absoluteName));
-            VBox vbox = fxmlLoader.load();
-            Scene mainScene = HelloApplication.getMainScene();
-            VBox mainVbox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-            Node mainMenu = mainVbox.getChildren().get(0);
-            mainVbox.getChildren().clear();
-            mainVbox.getChildren().add(mainMenu);
-            mainVbox.getChildren().addAll(vbox.getChildren());
-
-            DepartmentListController departmentListController = fxmlLoader.getController();
-            departmentListController.setService(new DepartmentService());
-            departmentListController.updateTableView();
-
-
-        } catch (IOException e) {
-            Alerts.showAlert("IOException", "Error Loading view", e.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
 
     @FXML
     public void onMenuItemAboutAction(ActionEvent event) {
-        loadView("aboutview.fxml");
+        loadView("aboutview.fxml", x -> {
+        });
 
     }
 
@@ -72,7 +57,7 @@ public class MainviewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    private synchronized void loadView(String absoluteName) {
+    private synchronized <T> void loadView(String absoluteName, Consumer<T> action) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox vbox = fxmlLoader.load();
@@ -82,6 +67,9 @@ public class MainviewController implements Initializable {
             mainVbox.getChildren().clear();
             mainVbox.getChildren().add(mainMenu);
             mainVbox.getChildren().addAll(vbox.getChildren());
+
+            T controller = fxmlLoader.getController();
+            action.accept(controller);
 
 
         } catch (IOException e) {
