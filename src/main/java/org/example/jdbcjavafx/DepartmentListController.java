@@ -1,6 +1,5 @@
 package org.example.jdbcjavafx;
 
-import entities.Department;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import services.DepartmentService;
+import org.example.jdbcjavafx.entities.Department;
+import org.example.jdbcjavafx.services.DepartmentService;
 
 import java.net.URL;
 import java.util.List;

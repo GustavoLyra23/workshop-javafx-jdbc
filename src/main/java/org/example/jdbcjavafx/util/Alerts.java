@@ -1,4 +1,4 @@
-package util;
+package org.example.jdbcjavafx.util;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

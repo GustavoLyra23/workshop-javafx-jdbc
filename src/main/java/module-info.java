@@ -11,9 +11,10 @@ module org.example.jdbcjavafx {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
-    opens services to javafx.base, javafx.fxml;
-    opens entities to javafx.base, javafx.fxml;
-    opens org.example.jdbcjavafx to javafx.fxml;
+    opens org.example.jdbcjavafx.entities to javafx.base;
+    opens org.example.jdbcjavafx;
+    opens org.example.jdbcjavafx.services to javafx.base, javafx.fxml;
     exports org.example.jdbcjavafx;
 }
