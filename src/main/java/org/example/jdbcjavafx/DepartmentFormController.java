@@ -15,12 +15,17 @@ import org.example.jdbcjavafx.util.Constraints;
 import org.example.jdbcjavafx.util.Utils;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class DepartmentFormController implements Initializable {
+public class DepartmentFormController implements Initializable{
 
 
     private DepartmentService departmentService;
+
+    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
+
 
     private Department department;
 
@@ -39,6 +44,11 @@ public class DepartmentFormController implements Initializable {
     @FXML
     private Button btCancel;
 
+
+    public void subscribeDataChengeListener(DataChangeListener listener) {
+        dataChangeListeners.add(listener);
+    }
+
     @FXML
     public void onBtSaveAction(ActionEvent event) {
         if (department == null) {
@@ -50,10 +60,16 @@ public class DepartmentFormController implements Initializable {
         try {
             department = getFormData();
             departmentService.saveOrUpdate(department);
+            notifyDataChangeListeners();
             Utils.currentStage(event).close();
         } catch (DbException ex) {
             Alerts.showAlert("Error saving object", null, ex.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    private void notifyDataChangeListeners() {
+        dataChangeListeners.forEach(listener -> listener.onDataChanged());
+
     }
 
     private Department getFormData() {
