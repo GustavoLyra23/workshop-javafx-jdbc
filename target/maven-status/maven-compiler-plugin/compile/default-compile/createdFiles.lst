@@ -1,6 +1,8 @@
 org\example\jdbcjavafx\entities\Seller.class
+org\example\jdbcjavafx\SellertListController$1.class
 org\example\jdbcjavafx\util\Utils.class
 org\example\jdbcjavafx\exceptions\ValidationException.class
+org\example\jdbcjavafx\SellerFormController.class
 org\example\jdbcjavafx\HelloController.class
 org\example\jdbcjavafx\db\DbException.class
 org\example\jdbcjavafx\db\DbIntegrityException.class
@@ -14,11 +16,16 @@ org\example\jdbcjavafx\DepartmentListController$2.class
 org\example\jdbcjavafx\DataChangeListener.class
 org\example\jdbcjavafx\DepartmentListController.class
 org\example\jdbcjavafx\dao\DaoFactory.class
+org\example\jdbcjavafx\util\Utils$1.class
 org\example\jdbcjavafx\DepartmentListController$1.class
 org\example\jdbcjavafx\dao\impl\SellerDaoJDBC.class
+org\example\jdbcjavafx\SellertListController$2.class
 org\example\jdbcjavafx\util\Alerts.class
 org\example\jdbcjavafx\HelloApplication.class
+org\example\jdbcjavafx\util\Utils$2.class
 org\example\jdbcjavafx\dao\impl\DepartmentDaoJDBC.class
+org\example\jdbcjavafx\SellertListController.class
+org\example\jdbcjavafx\services\SellerService.class
 org\example\jdbcjavafx\util\Constraints.class
 org\example\jdbcjavafx\DepartmentFormController.class
 org\example\jdbcjavafx\services\DepartmentService.class
